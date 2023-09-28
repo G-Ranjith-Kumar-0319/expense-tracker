@@ -1,9 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const { db } = require('./db/db');
-
+const {readdirSync} = require('fs')
 const app = express();
-
 
 require('dotenv').config();
 
@@ -14,9 +13,13 @@ const port = process.env.PORT
 app.use(express.json());;
 app.use(cors());
 
-app.get('/', (req, res)=>{
-    res.send('Hello Ranjith')
-})
+//routes
+readdirSync('./routes').map((route)=>app.use('/api/v1', require('./routes/'+ route)))
+
+
+// app.get('/', (req, res)=>{
+//     res.send('Hello Ranjith')
+// })
 
 const server = ()=>{
     db()
