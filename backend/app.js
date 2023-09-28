@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const { db } = require('./db/db');
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.get('/', (req, res)=>{
 })
 
 const server = ()=>{
+    db()
     app.listen(port, ()=>{
         console.log('you are listening to Port', port)
     })
